@@ -1,0 +1,17 @@
+# My Current Project Status
+
+## Current Day: Day 1
+## Current Phase: Phase 1 — Setup
+## Last Completed Task: Nothing yet, starting today
+
+## What is working:
+- Nothing yet
+
+## Current blockers / errors:
+- None yet
+
+## Files created so far:
+- None yet
+
+## Questions I have:
+- None yet

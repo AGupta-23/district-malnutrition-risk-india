@@ -1,0 +1,42 @@
+1. Funny -- right clicked new file -- txt file and saved as readme or Learnings.txt -- so basically got saved as txt.txt
+
+2. To check your operating system, use the method specific to your device:
+Windows: Press Windows Key + R, type winver, and press Enter.  
+This displays your Windows edition and version. 
+Alternatively, go to Start > Settings > System > About for detailed device and OS specifications.
+
+--> OS - Windows 11 currently for this project
+
+3. IMPORTANT WARNING  Python Version Issue
+Python 3.14 was just released and is bleeding edge. 
+Key libraries for your project — especially GeoPandas, XGBoost, and SHAP — do not yet have stable builds for 3.14. 
+You will hit installation errors later that are very hard to debug as a beginner.
+The safe version for this project is Python 3.11. It has full support for every single library in your stack.
+
+4. After I downloaded the python version required -- The next steps given by claude --
+Open VS Code → press Ctrl + ` (that's the backtick key, just below Escape)
+This opens the built-in terminal. Type this and press Enter:
+py -3.11 --version
+--> Output -- Python 3.11.9
+
+5. Created Virtual env in the project folder
+Creation code in terminal--> py -3.11 -m venv venv311
+Activation -->venv311\Scripts\activate
+
+What is a Virtual Environment?
+Qa: What is a virtual environment in Python?
+"A virtual environment is an isolated Python installation for a specific project. It has its own Python version and its own set of libraries — completely separate from the system Python. Think of it like a clean room dedicated to one project, so nothing from outside can interfere with it."
+
+
+Qb: Why do we use virtual environments?
+"Because different projects need different library versions. For example, one project needs XGBoost 1.5 and another needs XGBoost 2.0 — if both share the same Python, they'll conflict and break. A virtual environment keeps each project's dependencies isolated and reproducible. It also ensures that when someone else runs your code, they get the exact same environment you used."
+
+
+Qc: What does 'activating' a virtual environment mean?
+"Activating tells your terminal — use the Python and libraries inside this folder, not the system-wide Python. The (venv311) prefix you see in the terminal is the confirmation that you're working inside the isolated environment."
+
+Qd: What is the Scripts folder inside a virtual environment?
+
+"When Python creates a virtual environment, it generates a Scripts folder inside it. This folder contains the actual executables — like python.exe, pip.exe, and the activate file we just ran. When you run venv311\Scripts\activate, you're telling Windows — use the python.exe sitting in this Scripts folder, not the global one. It's essentially the engine room of the virtual environment."
+
+6. 
