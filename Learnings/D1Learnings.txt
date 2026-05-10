@@ -39,4 +39,94 @@ Qd: What is the Scripts folder inside a virtual environment?
 
 "When Python creates a virtual environment, it generates a Scripts folder inside it. This folder contains the actual executables — like python.exe, pip.exe, and the activate file we just ran. When you run venv311\Scripts\activate, you're telling Windows — use the python.exe sitting in this Scripts folder, not the global one. It's essentially the engine room of the virtual environment."
 
-6. 
+6.  In terminal I added --> mkdir data\raw data\processed notebooks src outputs models reports
+Showed Error as I was using cmd but giving powershell command
+PowerShell needs commas between folder names, not spaces.
+so correct --> mkdir data\raw, data\processed, notebooks, src, outputs, models, reports
+
+Issue 1 — mkdir failed in PowerShell
+
+Command from CMD doesn't work in PowerShell
+CMD uses spaces: mkdir a b c
+PowerShell uses commas: mkdir a, b, c
+Lesson: Always check which terminal you're in before running commands
+
+7. >> tree -->showed the exact project tree
+
+8. To add new files -->code requirements.txt and code README.md in terminal --> also after copy pasting the code i did (ctrl+S) Only then the files showed on my folder list
+
+9. Then git init and further commands --BUT 
+Issue 2 — venv311 got tracked by Git
+We created venv311 before creating .gitignore
+Git started tracking thousands of library files inside it
+Lesson: Always create .gitignore BEFORE running git add .
+Correct order: .gitignore first → then git add → then git commit
+
+Issue 3 — How we fixed it
+git rm -r --cached venv311 — removes venv from Git tracking
+Does NOT delete the actual folder from your computer
+Just tells Git "stop watching this"
+Lesson: --cached flag = remove from Git only, not from disk
+
+Golden Rule learned today:
+Never push venv to GitHub. It has thousands of files, is machine-specific, and unnecessary. Anyone cloning your repo just runs pip install -r requirements.txt to recreate it.
+
+
+10. One thing to do right now so this never happens again:
+Every time we start a new terminal session, before doing anything, run these two checks:
+Check 1 — Are you in the right folder?
+powershell-->pwd   (print working directory)
+Should show: D:\Resume Project DS 1
+Check 2 — Is venv active?
+Look for (venv311) in your prompt. If missing, run:
+powershellvenv311\Scripts\activate
+Make these two a habit. Every single session. Non-negotiable.
+
+11. That blue line on the left side of lines 47-69 is VS Code's modified line indicator.
+It means those lines are newly added since your last Git commit. Nothing is wrong — it's just VS Code visually showing you "these lines changed since last save/commit."
+Three colours you'll see there:
+🔵 Blue = line modified
+🟢 Green = new line added
+🔴 Red arrow = line deleted
+Very useful habit — glance at it to know what you've changed before committing.
+
+12. Project Folder Structure — What Goes Where
+
+data/raw/
+Original downloaded datasets. Never edit anything here.
+NFHS-5 district factsheets (CSV)
+Census 2011 demographics (CSV)
+India district shapefile
+
+data/processed/
+Cleaned versions of the raw data after you've fixed missing values, merged datasets etc.
+master_clean.csv — your final cleaned dataset (Day 13)
+
+notebooks/
+All your Jupyter notebooks. One per phase.
+01_data_cleaning.ipynb
+02_eda.ipynb
+03_modeling.ipynb etc.
+
+src/
+Python scripts — reusable code extracted from notebooks.
+train_model.py
+predict.py
+preprocess.py
+
+outputs/
+All charts, maps, plots your code generates.
+Correlation heatmaps
+Folium interactive map
+SHAP plots
+
+models/
+Saved ML models after training.
+xgboost_model.pkl
+scaler.pkl
+
+reports/
+Final documentation.
+Policy recommendations
+Data dictionary
+Project summary

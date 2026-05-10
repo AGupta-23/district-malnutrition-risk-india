@@ -1,11 +1,14 @@
 # My Current Project Status
 
-## Current Day: Day 1
-## Current Phase: Phase 1 — Setup
-## Last Completed Task: Nothing yet, starting today
+## Current Day: Day 2
+## Current Phase: Have to start day 2
+## Last Completed Task: Day 1 — Full environment and folder setup done
 
 ## What is working:
-- Nothing yet
+- Python 3.11.9 via venv311
+- Project folder structure created
+- requirements.txt and README.md created
+- GitHub repo pushed
 
 ## Current blockers / errors:
 - None yet
