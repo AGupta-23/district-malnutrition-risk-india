@@ -1,20 +1,37 @@
 # My Current Project Status
 
-## Current Day: Day 2
-## Current Phase: Have to start day 2
-## Last Completed Task: Day 1 — Full environment and folder setup done
+## Current Day: Day 3
+## Current Phase: Setup & Environment (Phase 1)
+## Last Completed Task: Day 2 — Git & GitHub setup complete. Full folder structure pushed to GitHub.
 
 ## What is working:
 - Python 3.11.9 via venv311
-- Project folder structure created
-- requirements.txt and README.md created
-- GitHub repo pushed
+- Project folder structure created and visible on GitHub
+- requirements.txt and README.md created and pushed
+- .gitignore in place
+- All 7 folders visible on GitHub (data/raw, data/processed, notebooks, src, outputs, models, reports)
+- Git commits and push working correctly
+- Learnings/ folder created for notes
 
 ## Current blockers / errors:
-- None yet
+- None
 
 ## Files created so far:
-- None yet
+- Readme.md
+- requirements.txt
+- .gitignore
+- project_status.txt
+- Malnutrition_Project_55Day_Plan.docx
+- data/raw/.gitkeep
+- data/processed/.gitkeep
+- notebooks/.gitkeep
+- src/.gitkeep
+- outputs/.gitkeep
+- models/.gitkeep
+- reports/.gitkeep
 
 ## Questions I have:
-- None yet
+- None
+
+## Next Task:
+- Day 3 — Install all project libraries inside venv311

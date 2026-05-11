@@ -1,0 +1,64 @@
+1. pandas lets you work with tables of data, scikit-learn has ML algorithms, folium draws maps.
+
+2. python -m pip install --upgrade pip --> pip 26.1.1
+
+3. Group 1 — Core Data Science
+pip install pandas numpy matplotlib seaborn plotly scipy
+
+pandas — working with tables/CSV files (your main workhorse)
+numpy — math operations on numbers/arrays
+matplotlib — basic charts and plots
+seaborn — prettier statistical charts built on matplotlib
+plotly — interactive charts
+scipy — statistical tests (t-test, chi-square in EDA phase)
+
+4. Group 2 — Machine Learning
+pip install scikit-learn xgboost imbalanced-learn
+
+scikit-learn — Logistic Regression, Random Forest, train/test split, scalers
+xgboost — your best-performing model for this project
+imbalanced-learn — SMOTE to fix class imbalance
+
+5. Group 3 — Explainability & Visualization
+pip install shap yellowbrick
+
+shap — explains why the model gave a district a High/Low risk score
+yellowbrick — visual ML diagnostics (learning curves, confusion matrix)
+
+6. Group 4 — Geospatial (install separately, it's heavy)
+pip install geopandas folium
+
+geopandas — works with India's district shapefile (.shp format)
+folium — builds the interactive map policymakers will use
+
+7. Group 5 — API & Dashboard
+pip install fastapi uvicorn pydantic streamlit
+
+fastapi — builds the prediction API endpoint
+uvicorn — the server that runs FastAPI
+pydantic — validates the data coming into your API
+streamlit — builds your interactive web dashboard
+
+8. Group 6 — MLflow & Utilities
+pip install mlflow joblib fuzzywuzzy python-Levenshtein
+
+mlflow — tracks all your ML experiments (like a logbook)
+joblib — saves your trained model to a file
+fuzzywuzzy — fixes mismatched district name spellings across datasets
+python-Levenshtein — makes fuzzywuzzy faster (install both together)
+
+9. Group 7 — Jupyter Notebook
+pip install notebook ipykernel
+
+notebook — runs Jupyter in your browser
+ipykernel — connects your venv311 to Jupyter so it uses the right Python
+
+10. Then I - Registered venv311 with Jupyter 
+python -m ipykernel install --user --name=venv311 --display-name "Python (venv311)"
+What this does: Registers your virtual environment as a selectable kernel in Jupyter. When you open a notebook, you'll select "Python (venv311)" from the top-right dropdown.
+
+11. Then - verified if everything worked, it did
+python -c "import pandas; import numpy; import sklearn; import xgboost; import streamlit; print('All good!')"
+
+12. pip freeze > requirements.txt 
+freezed all, What this does: Writes every installed library + its version number into requirements.txt. Anyone (or any server) can recreate your exact environment later with pip install -r requirements.txt. This is what professional teams do.
