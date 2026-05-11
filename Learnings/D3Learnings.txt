@@ -53,6 +53,22 @@ pip install notebook ipykernel
 notebook — runs Jupyter in your browser
 ipykernel — connects your venv311 to Jupyter so it uses the right Python
 
+The problem Jupyter has by default
+When you install Jupyter and open a notebook, Jupyter needs to run your Python code somewhere. That "somewhere" is called a kernel — think of it as the engine that actually executes your code.
+By default, Jupyter uses your system Python — the Python installed globally on your laptop, not the one inside your venv311.
+
+Why that's a problem for you
+You installed all your libraries (pandas, xgboost, shap, etc.) inside venv311. Your system Python has none of them.
+So if Jupyter uses system Python and you write import pandas in a notebook — it will say ModuleNotFoundError, even though you definitely installed pandas. This confuses a lot of beginners and they think the install failed. It didn't — Jupyter was just looking in the wrong place.
+
+What the ipykernel command did
+It introduced venv311 to Jupyter. It basically told Jupyter:
+"Hey, there's another Python engine available called 'Python (venv311)' — use that one when the user asks."
+Now when you open a Jupyter notebook, you'll see a kernel selector in the top-right corner. You select Python (venv311) and from that point Jupyter runs all your code using venv311's Python — where all your libraries live.
+
+One-line summary:
+Jupyter needed to know your venv311 exists. The ipykernel command made that introduction. Without it, your notebooks would throw errors on every import.
+
 10. Then I - Registered venv311 with Jupyter 
 python -m ipykernel install --user --name=venv311 --display-name "Python (venv311)"
 What this does: Registers your virtual environment as a selectable kernel in Jupyter. When you open a notebook, you'll select "Python (venv311)" from the top-right dropdown.
