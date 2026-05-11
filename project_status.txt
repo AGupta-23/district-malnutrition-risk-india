@@ -1,8 +1,8 @@
 # My Current Project Status
 
-## Current Day: Day 3
-## Current Phase: Setup & Environment (Phase 1)
-## Last Completed Task: Day 2 — Git & GitHub setup complete. Full folder structure pushed to GitHub.
+## Current Day: Day 4
+## Current Phase: Data Collection & Storage (Phase 2)
+## Last Completed Task: Day 3 — All project libraries installed, venv311 registered with Jupyter, requirements.txt updated and pushed to GitHub.
 
 ## What is working:
 - Python 3.11.9 via venv311
@@ -12,6 +12,9 @@
 - All 7 folders visible on GitHub (data/raw, data/processed, notebooks, src, outputs, models, reports)
 - Git commits and push working correctly
 - Learnings/ folder created for notes
+- All project libraries installed inside venv311
+- venv311 registered as kernel in Jupyter — "Python (venv311)"
+- GitHub email verified and set as Primary
 
 ## Current blockers / errors:
 - None
@@ -34,4 +37,4 @@
 - None
 
 ## Next Task:
-- Day 3 — Install all project libraries inside venv311
+- Day 4 — Download NFHS-5 district factsheets and explore data in Excel
