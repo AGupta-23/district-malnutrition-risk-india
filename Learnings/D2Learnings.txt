@@ -1,0 +1,20 @@
+1. Your folder structure is missing from the repo.
+The plan says you need these folders visible on GitHub:
+data/raw
+data/processed
+notebooks
+src
+outputs
+models
+reports
+GitHub does not show empty folders. You need to add a .gitkeep file inside each empty folder so they appear on GitHub.
+
+A .gitkeep file is an unofficial convention used in Git repositories to force Git to track an otherwise empty directory.  Since Git does not track empty folders by default, placing a PLACEHOLDER FILE named .gitkeep inside a directory ensures that the folder structure is preserved and committed to version control.
+
+New-Item -ItemType Directory -Force -Path data/raw
+New-Item -ItemType File -Path data/raw/.gitkeep
+
+New-Item -ItemType Directory — creates a folder (like mkdir)
+-Force — does not throw an error if folder already exists
+New-Item -ItemType File — creates an empty file (like touch on Mac/Linux)
+.gitkeep — a dummy empty file, just so GitHub shows the folder
