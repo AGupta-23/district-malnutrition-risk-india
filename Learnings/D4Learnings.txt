@@ -1,0 +1,35 @@
+1. NFHS-5 Kaggle Dataset Observations
+====================================
+File: nfhs5_district_kaggle.csv
+Rows: 707 (one row per district)
+Columns: 109
+Key target columns found: stunting %, wasting %, underweight %
+Key predictor columns found: female literacy, sanitation, clean fuel, 
+antenatal care, child marriage, breastfeeding, BMI, anaemia, electricity
+Missing value check: pending (Day 7)
+Data dictionary: pending (Day 7)
+
+Most Important Columns for Your Project
+🎯 Target Variables (what you will predict):
+
+Children under 5 years who are stunted (height-for-age) (%)
+Children under 5 years who are wasted (weight-for-height) (%)
+Children under 5 years who are underweight (weight-for-age) (%)
+
+✅ All three are present. This is the most important finding.
+
+🔑 Key Predictor Columns (features your ML model will use):
+
+Women (age 15-49) who are literate (%) — female literacy
+Households using clean fuel for cooking (%) — proxy for wealth/development
+Population living in households that use an improved sanitation facility (%) — sanitation
+Households with any usual member covered under a health insurance scheme (%) — healthcare access
+Mothers who had at least 4 antenatal care visits (%) — maternal care
+Women age 20-24 years married before age 18 years (%) — child marriage rate
+Children under age 6 months exclusively breastfed (%) — infant feeding
+Women (age 15-49 years) whose BMI is below normal (%) — maternal nutrition
+Children age 6-59 months who are anaemic (%) — child health indicator
+Population living in households with electricity (%) — infrastructure proxy
+
+Shapefile: gadm41_IND_2 files downloaded (district level)
+Census 2011: Skipped — NFHS-5 already has all demographic features needed
