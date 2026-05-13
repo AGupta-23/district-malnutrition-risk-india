@@ -1,0 +1,85 @@
+1. pd.read_csv() loads tabular data
+gpd.read_file() loads shapefiles
+df.info() reveals dtype problems hiding in plain sight
+Target columns being object instead of float64 is a real-world data quality issue
+676 vs 706 district mismatch between datasets is a merge challenge you will solve in Day 12
+
+2. Right now the data is sitting in a folder - D6 we will load the data in jupyter notebook and run through python and use pandas() and geopandas library().
+
+3. What is the shape? How many rows and columns exist
+What are the columns? What variables are available to you
+What are the data types? Is Python reading numbers as numbers, or as text accidentally
+
+Think of it as reading the label on a medicine bottle before prescribing it to a patient.
+
+What Tool We Use & Why
+Jupyter Notebook — because it lets you write code AND write notes in the same place. Every cell shows output immediately. This is the industry standard for data exploration.
+
+4. Ran --> jupyter notebook (in terminal to launch) - Already installed in my venv311 Environment and created day6_data_loading.ipynb file - chose kernel as - python venv311
+
+5. Cell 1 - imported both libraries 
+import pandas as pd — loads the Pandas library and gives it a short nickname pd. Pandas is your main tool for reading and working with CSV files.
+import geopandas as gpd — loads GeoPandas, nicknamed gpd. This is the special library that can read map/shapefile data.
+
+6. Cell 2 - .read_csv function used and saved to dataframe and .shape function used
+What we are doing
+We are telling Pandas to read your CSV file and store it in a variable called df. The name df stands for "dataframe" — that is what Pandas calls a table of data.
+What each line does:
+
+pd.read_csv(...) — tells Pandas to open and read a CSV file
+"../data/raw/nfhs5_district_kaggle.csv" — the path to your file. The .. means "go one folder up" (from notebooks/ back to project root, then into data/raw/)
+df.shape — tells you how many rows and columns exist as (rows, columns)
+print(...) — displays the result on screen
+
+7. # See the first 5 rows of the dataset
+df.head() -->df.head() shows you the first 5 rows of your dataset — like a quick peek at what the data actually looks like as a table.
+
+8. # See all column names
+df.columns.tolist()-->df.columns gives you all column names. .tolist() converts them into a simple readable list.
+We need to see this because we have to find our 3 target variables — the stunting %, wasting %, and underweight % columns. Their names in this dataset may be long sentences like the ones you saw in the table header.
+
+9. df.info() tells you for every column:
+
+Its name
+How many non-null (non-missing) values exist
+What data type Python assigned it — number, text, decimal etc.
+
+This is critical because sometimes numbers get read as text accidentally — and that breaks all future calculations.
+
+706 entries — 706 districts confirmed
+109 columns — all loaded
+float64(54) — 54 columns are decimal numbers (good, most health % columns)
+int64(4) — 4 columns are whole numbers
+object(51) — 51 columns are being read as text ⚠️
+
+That object(51) needs attention later. Some percentage columns may have been read as text instead of numbers — possibly because they contain special characters like * or - in the raw data. We will fix this in Day 7-8 during cleaning.
+
+10. # Check missing values in every column
+df.isnull().sum()
+isnull() checks every cell — is it empty or not. .sum() counts how many empty cells exist per column.
+This gives us our first look at data quality. In health datasets, missing values are very common — some districts may not have reported certain indicators.
+
+11. # Quick statistical summary of numerical columns
+df.describe()
+df.describe() gives you for every numerical column:
+
+count, mean, min, max
+25%, 50%, 75% percentiles
+
+We mainly want to check our 3 target columns — are the stunting/wasting/underweight percentages in a realistic range? For India we expect stunting around 30-40%.
+
+12. BUT ALL WERE OBJECT type
+
+13. # Load the India district shapefile
+gdf = gpd.read_file("../data/raw/india_shapefile/gadm41_IND_2.shp")
+
+print("Shape:", gdf.shape)
+print("Columns:", gdf.columns.tolist()) 
+
+14. gdf.head() 
+
+THAT'S ALL FOR TODAY
+
+*A Jupyter kernel is the computational engine that executes code in a notebook. It maintains the state of all variables and imports for the duration of a session. When a kernel restarts, all in-memory state is lost and cells must be re-executed. In production workflows this is why we separate data loading, preprocessing, and modeling into modular scripts rather than relying on notebook state.*
+
+One simple rule: If you ever see a NameError: X is not defined — your kernel restarted. Always re-run all cells from the top.

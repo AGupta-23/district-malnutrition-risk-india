@@ -1,20 +1,21 @@
 # My Current Project Status
 
-## Current Day: Day 4
-## Current Phase: Data Collection & Storage (Phase 2)
-## Last Completed Task: Day 3 — All project libraries installed, venv311 registered with Jupyter, requirements.txt updated and pushed to GitHub.
+Current Day: Day 6 Complete
+Last Completed Task: Day 6 — Loaded NFHS-5 (706x109) and shapefile (676x14) into Jupyter. Found all 3 target variables. Identified object dtype issue on target columns.
+Next Task: Day 7 — Deep dive into missing values, understand object columns, identify hidden nulls
 
 ## What is working:
 - Python 3.11.9 via venv311
 - Project folder structure created and visible on GitHub
 - requirements.txt and README.md created and pushed
-- .gitignore in place
-- All 7 folders visible on GitHub (data/raw, data/processed, notebooks, src, outputs, models, reports)
+- .gitignore updated to exclude data files
+- All 7 folders visible on GitHub
 - Git commits and push working correctly
 - Learnings/ folder created for notes
-- All project libraries installed inside venv311
-- venv311 registered as kernel in Jupyter — "Python (venv311)"
-- GitHub email verified and set as Primary
+- nfhs5_district_kaggle.csv downloaded (707 rows, 109 columns)
+- All 3 target variables confirmed in dataset (stunting, wasting, underweight %)
+- India district shapefile downloaded (gadm41_IND_2 files inside data/raw/india_shapefile/)
+- Data files excluded from Git tracking via .gitignore
 
 ## Current blockers / errors:
 - None
@@ -26,15 +27,23 @@
 - project_status.txt
 - Malnutrition_Project_55Day_Plan.docx
 - data/raw/.gitkeep
+- data/raw/nfhs5_district_kaggle.csv (not tracked by Git)
+- data/raw/india_shapefile/ (not tracked by Git)
 - data/processed/.gitkeep
 - notebooks/.gitkeep
 - src/.gitkeep
 - outputs/.gitkeep
 - models/.gitkeep
 - reports/.gitkeep
+- Learnings/day4_observations.txt
+
+## Datasets confirmed:
+- PRIMARY: nfhs5_district_kaggle.csv — 707 districts, 109 columns
+- GEOMETRY: gadm41_IND_2.shp — India district boundaries
+- Census 2011: Skipped — NFHS-5 already contains all demographic features needed
 
 ## Questions I have:
 - None
 
 ## Next Task:
-- Day 4 — Download NFHS-5 district factsheets and explore data in Excel
+- Day 5 — Install all project libraries inside venv311 and create requirements.txt

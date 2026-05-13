@@ -1,0 +1,26 @@
+Read Day 3 Learnings where we install all libraries required-
+
+Python Virtual Environments & pip — Full Tutorial" — Tech With Tim or Corey Schafer
+Just 15 minutes. Understand why we use venv before installing anything.
+
+What "pip freeze" means
+Think of it like this:
+You have been installing libraries one by one into your venv311. Python knows what is installed, but your project folder has no record of it. If you send your project to someone else, or deploy it to a server, they have no idea what to install.
+pip freeze takes a snapshot of everything currently installed in your venv and writes it to a file — with exact version numbers.
+
+Simple analogy
+Imagine you cooked a dish and it came out perfect.
+
+pip freeze = writing down the exact recipe with exact quantities
+requirements.txt = that written recipe
+
+Now anyone can recreate the exact same dish. A deployment server like Render will read requirements.txt and install the exact same versions you used — no surprises, no version conflicts.
+
+Why exact versions matter
+Without version numbers, someone might install pandas==3.0 tomorrow when you built with pandas==2.2.1 — and your code breaks because the API changed. The freeze locks it down.
+
+The two commands and what they do
+bashpip freeze
+Just prints the list to your terminal. Nothing is saved.
+bashpip freeze > requirements.txt
+The > means "send this output into a file". This is what actually saves it.
