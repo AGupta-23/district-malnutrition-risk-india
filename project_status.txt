@@ -1,8 +1,8 @@
 # My Current Project Status
 
-Current Day: Day 6 Complete
-Last Completed Task: Day 6 — Loaded NFHS-5 (706x109) and shapefile (676x14) into Jupyter. Found all 3 target variables. Identified object dtype issue on target columns.
-Next Task: Day 7 — Deep dive into missing values, understand object columns, identify hidden nulls
+Current Day: Day 7 Complete
+Last Completed Task: Day 7 — Found trailing spaces in all object columns. Fixed with str.strip(). Converted 3 target columns to float64. Found 1 genuine NaN — Jabalpur (MP) in stunting column.
+Next Task: Day 8 — Handle missing values, median imputation for Jabalpur, SimpleImputer for remaining columns
 
 ## What is working:
 - Python 3.11.9 via venv311
@@ -16,6 +16,9 @@ Next Task: Day 7 — Deep dive into missing values, understand object columns, i
 - All 3 target variables confirmed in dataset (stunting, wasting, underweight %)
 - India district shapefile downloaded (gadm41_IND_2 files inside data/raw/india_shapefile/)
 - Data files excluded from Git tracking via .gitignore
+- All object columns stripped of trailing spaces using str.strip()
+- Target columns converted from object to float64
+- Hidden null identified: Jabalpur MP — stunting column (1 row)
 
 ## Current blockers / errors:
 - None
@@ -31,6 +34,7 @@ Next Task: Day 7 — Deep dive into missing values, understand object columns, i
 - data/raw/india_shapefile/ (not tracked by Git)
 - data/processed/.gitkeep
 - notebooks/.gitkeep
+- notebooks/day7_missing_values.ipynb
 - src/.gitkeep
 - outputs/.gitkeep
 - models/.gitkeep
@@ -46,4 +50,4 @@ Next Task: Day 7 — Deep dive into missing values, understand object columns, i
 - None
 
 ## Next Task:
-- Day 5 — Install all project libraries inside venv311 and create requirements.txt
+- Day 8 — Handle missing values, median imputation, SimpleImputer

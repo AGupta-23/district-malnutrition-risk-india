@@ -1,0 +1,115 @@
+1. Day 7 is now complete. Here's what you found today:
+
+✅ No real NaN values — hidden as trailing spaces
+✅ Fixed all object columns with str.strip()
+✅ Target columns converted to float64
+✅ 1 genuine missing value — Jabalpur, MP (stunting only)
+
+2. DATA CLEANING STARTS
+
+import pandas as pd 
+df=pd.read_csv()
+# df=pd.read_csv("D:\Resume Project DS 1\data\raw\nfhs5_district_kaggle.csv")  ---> GAVE ERROR
+# df = pd.read_csv("D:\\Resume Project DS 1\\data\\raw\\nfhs5_district_kaggle.csv") --WORKS  
+# df = pd.read_csv(r"D:\Resume Project DS 1\data\raw\nfhs5_district_kaggle.csv") -->Use raw strings: Prepend the string with r to tell Python to treat backslashes as literal characters
+df = pd.read_csv('../data/raw/nfhs5_district_kaggle.csv')
+Learnt all possible ways I can and cannot write
+
+3. # Sanity check
+print(df.shape) -->df.shape returns a tuple — (rows, columns) — showing the dimensions of your DataFrame.
+Interviewer answer:
+"df.shape is a property of a pandas DataFrame that returns a tuple of (number of rows, number of columns). For example, our NFHS-5 dataset returns (707, 109) meaning 707 districts and 109 features. I use it as a sanity check after every load, merge, or cleaning step to confirm no rows or columns were accidentally dropped."
+That last line — "I use it after every load, merge, or cleaning step" — is what makes the answer senior-level instead of beginner-level.
+
+4. pd.DataFrame({...}) — create a new table to store our findings
+'missing_count': df.isnull().sum() — for each column, count how many values are missing
+'missing_pct': (df.isnull().sum() / len(df)) * 100 — convert that count to a percentage out of 707 rows
+missing[missing['missing_count'] > 0] — keep only columns where at least 1 value is missing (hide the clean ones)
+.sort_values('missing_pct', ascending=False) — sort from most missing to least missing so worst columns appear first
+print(missing) — display the final table
+
+OUTPUT Came -Empty DataFrame
+Columns: [missing_count, missing_pct]
+Index: []
+
+What this output means:
+Empty DataFrame means zero columns had missing values (NaN).
+The 2 column headers missing_count and missing_pct are visible because the table structure exists — but no rows appear because the filter missing_count > 0 found nothing to show.
+
+Why this happened in our case:
+The missing values were not real NaN — they were hiding as trailing spaces like '21.6 '. Pandas does not count spaces as missing, so isnull() returned False for every cell.
+
+5. # Check what suspicious values exist
+for col in df.columns:
+    unique_vals = df[col].unique()
+    for val in unique_vals:
+        if str(val).strip() in ['-', 'N/A', 'NA', '..', '', 'n/a', 'null']:
+            print(f"{col}: '{val}'")
+ 
+What each function does:
+df.columns — gives list of all 109 column names to loop through
+df[col].unique() — for one column, returns all distinct values (no repeats) — e.g. ['21.6 ', '34.2 ', '-', ...]
+str(val) — converts value to string (some columns may have numbers, this makes comparison safe)
+.strip() — removes leading and trailing spaces from the value
+in ['-', 'N/A', 'NA', '..', '', 'n/a', 'null'] — checks if the cleaned value matches any known disguise for missing data
+print(f"{col}: '{val}'") — if match found, print the column name and the suspicious value
+
+output= NO OUTPUT Why?
+why was there no output? please explain simply18:20Claude responded: Because none of your 109 columns contained any of these values: -, N/A, NA, .Because none of your 109 columns contained any of these values: -, N/A, NA, .., '', n/a, null.
+The missing values in your dataset were just trailing spaces like '21.6 ' — which is not in our suspicious list, so nothing got flagged.
+
+'21.6 ' is a valid number, not a missing value.
+The trailing space was the problem — it was preventing pandas from recognising it as a float. But the value itself was never missing, it was always there.
+So in our dataset:
+
+Missing values → 0 (no NaN, no dashes, no blanks)
+Dirty values → all numbers had trailing spaces → prevented float conversion
+
+The only actual missing value we found was Jabalpur — and that only appeared after we stripped spaces and converted to float. Before cleaning, even Jabalpur had some unreadable value sitting there, not a blank.
+
+6. print(df[stunt_col].unique()[:20]) what does[:20]mean
+df[stunt_col] — select the stunting column
+.unique() — get all distinct values in that column (no repeats)
+[:20] — show only the first 20 of those unique values (because there could be 700+ unique numbers, we don't need all of them)
+
+Why we used it: We wanted to see the raw format of values — that's how we spotted the trailing space in '21.6 ' and solved the object dtype mystery.
+
+7.Line by line:
+df.apply(...) — apply a function to every column one by one
+lambda col: — a mini function that takes one column as input
+col.str.strip() — remove leading/trailing spaces from every value in that column
+if col.dtype == 'object' — only strip text columns (no point stripping number columns)
+else col — if column is already numeric, leave it untouched
+
+pd.to_numeric(df[stunt_col], errors='coerce') — convert the stunting column from text to float
+
+The errors part — most important:
+errors='coerce' means — if any value cannot be converted to a number, don't crash, just replace it with NaN silently.
+Three options exist:
+
+errors='coerce' → bad value becomes NaN ✅ we used this
+errors='raise' → bad value crashes the code with error
+errors='ignore' → bad value stays as original text
+
+
+Why we used coerce: Jabalpur had one unreadable value. Without coerce the entire conversion would have crashed. Instead it silently became NaN and we caught it in the next line with isnull().sum().
+
+8. print(df[df[stunt_col].isnull()][['State/UT', 'District Names', stunt_col]])
+stunt_col]])
+18:30
+Claude responded: Plain English: Find the row where stunting value is missing and show me which district it belongs to.
+Plain English: Find the row where stunting value is missing and show me which district it belongs to.
+
+Layer by layer (read from inside out):
+
+df[stunt_col].isnull() — gives True/False for every row (True = missing)
+
+df[df[stunt_col].isnull()] — filters DataFrame to keep only rows where stunting is missing
+
+[['State/UT', 'District Names', stunt_col]] — from those filtered rows, show only these 3 columns (no need to see all 109)
+
+print(...) — display the result
+
+Why we did this: We knew 1 value became NaN after conversion. This line told us exactly who it was — Jabalpur, Madhya Pradesh — so we can handle it properly in Day 8 instead of blindly filling it.
+
+Interviewer answer: "After conversion I always verify which specific rows became NaN using boolean masking, so I can make an informed imputation decision rather than a blanket fix."
